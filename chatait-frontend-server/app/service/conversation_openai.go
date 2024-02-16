@@ -8,6 +8,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/http"
+
 	"github.com/anlityli/chatait-free/chatait-frontend-server/app/model/request"
 	"github.com/anlityli/chatait-free/chatait-frontend-server/app/model/response"
 	"github.com/anlityli/chatait-free/chatait-frontend-server/library/auth"
@@ -27,7 +29,6 @@ import (
 	"github.com/gogf/gf/os/glog"
 	"github.com/gogf/gf/text/gstr"
 	"github.com/gogf/gf/util/gconv"
-	"net/http"
 )
 
 var ConversationOpenai = &conversationOpenaiService{}
@@ -44,7 +45,7 @@ func (s *conversationOpenaiService) Speak(r *ghttp.Request) (re *response.Conver
 	userId := auth.GetUserId(r)
 	walletType := constant.WalletTypeGpt3
 	amount := 100
-	model := openai.ModelGPT35Turbo
+	model := "gpt-3.5-turbo-0125"
 	// 如果用户次数不足直接报错
 	walletData := libservice.Wallet.GetAllBalance(userId)
 	if requestModel.TopicType == constant.TopicTypeOpenaiGPT3 {
